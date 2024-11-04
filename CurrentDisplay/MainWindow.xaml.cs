@@ -16,9 +16,14 @@ namespace CurrentDisplay
     /// </summary>
     public partial class MainWindow : Window
     {
+        MainWindowData mainWindowData;
+
         public MainWindow()
         {
             InitializeComponent();
+            mainWindowData = this.DataContext as MainWindowData;
         }
+
+       
     }
 }
