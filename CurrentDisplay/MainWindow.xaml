@@ -5,8 +5,134 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CurrentDisplay"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="電流値表示" Height="450" MinHeight="450" Width="800" MinWidth="800">
 
+    <Window.DataContext>
+        <local:MainWindowData/>
+    </Window.DataContext>
+    
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="10"/>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- メニューバー -->
+        <Grid Grid.Column="0" Background="{Binding main_color}">
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="{Binding base2_color}"/>
+                </Style>
+            </Grid.Resources>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <!-- 測定・接続状態表示 -->
+            <StackPanel Grid.Row="0">
+                
+            </StackPanel>
+            
+            <!-- メニュー項目 -->
+            <StackPanel Grid.Row="1">
+
+            </StackPanel>
+        </Grid>
+
+        
+        <!-- 測定結果表示部分 -->
+        <Grid Grid.Column="1" Margin="25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*" MaxWidth="175"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 測定結果左側（使用率バー表示以外）-->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <!-- 電流値と電流制限の表示 -->
+                <Grid Grid.Row="0" Background="{Binding base2_or_main_color}">
+                    <Grid.Resources>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{Binding main_or_base1_color}"/>
+                        </Style>
+                        <Style TargetType="Viewbox">
+                            <Setter Property="Margin" Value="5"/>
+                        </Style>
+                    </Grid.Resources>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="12*"/>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="4*"/>
+                    </Grid.RowDefinitions>
+
+                    <Viewbox Grid.Row="0">
+                        <TextBlock>現在の電流値</TextBlock>
+                    </Viewbox>
+                    <Viewbox Grid.Row="1">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding current}"/>
+                            <TextBlock>A</TextBlock>
+                        </StackPanel>
+                    </Viewbox>
+                    <Line Grid.Row="2" Stroke="#303051" X2="1" Stretch="Fill" StrokeThickness="2"/>
+                    <Viewbox Grid.Row="3">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>電流制限:</TextBlock>
+                            <TextBlock Text="{Binding current_limit}"/>
+                            <TextBlock>A</TextBlock>
+                        </StackPanel>
+                    </Viewbox>
+
+                </Grid>
+
+                <!-- 電流使用率・電流状態の表示 -->
+                <Viewbox Grid.Row="1">
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <StackPanel.Resources>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="{Binding main_color}"/>
+                            </Style>
+                            
+                        </StackPanel.Resources>
+
+                        <StackPanel Orientation="Horizontal" Margin="0,0,5,0">
+                            <TextBlock Text="{Binding current_use_rate}"/>
+                            <TextBlock>%</TextBlock>
+                        </StackPanel>
+
+                        <TextBlock Margin="5,0,0,0" Text="{Binding current_use_message}"/>
+
+                    </StackPanel>
+                </Viewbox>
+
+            </Grid>
+
+            <Viewbox Grid.Column="1" Margin="10,0,10,0">
+                <Grid Grid.Column="1">
+                    <Rectangle Fill="{Binding main_color}" VerticalAlignment="Bottom" Width="30" Height="{Binding bar_height}"/>
+                    <Rectangle Stroke="{Binding main_color}" VerticalAlignment="Bottom" Width="30" Height="200"/>
+                </Grid>
+            </Viewbox>
+            
+      
+        </Grid>
+        
     </Grid>
+    
+    
 </Window>
