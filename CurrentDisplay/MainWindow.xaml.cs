@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Configuration;
+using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -22,8 +24,9 @@ namespace CurrentDisplay
         {
             InitializeComponent();
             mainWindowData = this.DataContext as MainWindowData;
-        }
+            mainWindowData.current_limit = ConfigurationManager.AppSettings.Get("measurement_current_limit");
 
+        }
        
     }
 }
