@@ -80,7 +80,8 @@ namespace CurrentDisplay
             get { return _current; }
             set
             {
-                _current = value;
+                _current = Double.Parse(value).ToString("F2");
+                updateWindow();
                 NotifyPropertyChanged("current");
             }
         }
@@ -127,6 +128,15 @@ namespace CurrentDisplay
                 _bar_height = value;
                 NotifyPropertyChanged("bar_height");
             }
+        }
+
+        private void updateWindow()
+        {
+            double current_value = Double.Parse(current);
+            double limit_value = Double.Parse(current_limit);
+            double use_rate_value = current_value / limit_value * 100;
+            current_use_rate = use_rate_value.ToString("F1");
+            bar_height = (int)(use_rate_value * 2);
         }
     }
 }
