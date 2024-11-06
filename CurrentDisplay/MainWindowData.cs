@@ -81,6 +81,28 @@ namespace CurrentDisplay
         }
 
         // 数値の定義
+        private string _measurement_status = "測定中";
+        public string measurement_status
+        {
+            get { return _measurement_status; }
+            set
+            {
+                _measurement_status = value;
+                NotifyPropertyChanged("measurement_status");
+            }
+        }
+
+        private string _data_time = "--:--:--";
+        public string data_time
+        {
+            get { return _data_time; }
+            set
+            {
+                _data_time = value;
+                NotifyPropertyChanged("data_time");
+            }
+        }
+
         private string _current = "--.--";
         public string current
         {

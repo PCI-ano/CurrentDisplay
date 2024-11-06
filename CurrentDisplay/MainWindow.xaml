@@ -38,7 +38,14 @@
 
             <!-- 測定・接続状態表示 -->
             <StackPanel Grid.Row="0">
-                
+                <StackPanel.Resources>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="HorizontalAlignment" Value="Center"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Background="{Binding base1_color}" Foreground="{Binding main_color}" FontSize="40" Margin="0, 20, 0, 50" Padding="10" Text="{Binding measurement_status}"/>
+                <TextBlock Foreground="{Binding base2_color}" FontSize="15">データ取得時刻</TextBlock>
+                <TextBlock Foreground="{Binding base1_color}" FontSize="50" Text="{Binding data_time}"/>
             </StackPanel>
             
             <!-- メニュー項目 -->
