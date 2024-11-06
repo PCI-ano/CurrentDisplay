@@ -89,7 +89,7 @@
                             <TextBlock>A</TextBlock>
                         </StackPanel>
                     </Viewbox>
-                    <Line Grid.Row="2" Stroke="#303051" X2="1" Stretch="Fill" StrokeThickness="2"/>
+                    <Line Grid.Row="2" Stroke="{Binding main_or_base1_color}" X2="1" Stretch="Fill" StrokeThickness="2"/>
                     <Viewbox Grid.Row="3">
                         <StackPanel Orientation="Horizontal">
                             <TextBlock>電流制限:</TextBlock>
