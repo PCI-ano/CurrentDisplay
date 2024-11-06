@@ -25,8 +25,18 @@ namespace CurrentDisplay
             InitializeComponent();
             mainWindowData = this.DataContext as MainWindowData;
             mainWindowData.current_limit = ConfigurationManager.AppSettings.Get("measurement_current_limit");
-
+            
+            // センサーからの接続を受け付ける
+            MeasureServer server = new MeasureServer();
+            server.CurrentDataReceived += Server_CurrentDataReceived;
+            server.run();
         }
-       
+
+        // センサーから電流データを受け取ったとき
+        private void Server_CurrentDataReceived(object? sender, CurrentDataReceivedArgs e)
+        {
+            mainWindowData.current = e.Value.ToString();
+        }
+
     }
 }
