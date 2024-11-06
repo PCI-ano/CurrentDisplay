@@ -40,11 +40,16 @@ namespace CurrentDisplay
             double use_rate_value = current_value / limit_value * 100;  // 使用率
             double caution_use_rate = Double.Parse(ConfigurationManager.AppSettings.Get("measurement_caution_use_rate"));
             double warning_use_rate = Double.Parse(ConfigurationManager.AppSettings.Get("measurement_warning_use_rate"));
+            DateTime dateTime = DateTime.Now;
 
+            //データ取得時刻の更新
+            mainWindowData.data_time = dateTime.ToString("HH:mm:ss");
+
+            // 電流値と使用率の更新
             mainWindowData.current = current_value.ToString();
             mainWindowData.current_use_rate = use_rate_value.ToString("F1");
             
-            //使用率バー表示の更新
+            // 使用率バー表示の更新
             if (use_rate_value > 100)
             {
                 mainWindowData.bar_height = 200;
@@ -76,7 +81,7 @@ namespace CurrentDisplay
                 mainWindowData.main_or_base1_color = mainWindowData.nomal_color_scheme;
                 mainWindowData.base2_or_main_color = mainWindowData.base2_color_scheme;
             }
-            
+           
         }
 
       
