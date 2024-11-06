@@ -19,6 +19,13 @@ namespace CurrentDisplay
             PropertyChanged?.Invoke(this, e);
         }
 
+        //配色（画面の色設定の際に外部から呼び出される）
+        public Brush nomal_color_scheme = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 48, 48, 81));
+        public Brush caution_color_scheme = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 64, 64, 35));
+        public Brush warning_color_scheme = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 81, 48, 48));
+        public Brush base1_color_scheme = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 255, 255, 255));
+        public Brush base2_color_scheme = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 220, 220, 220));
+
         //色の定義
         private Brush _main_color = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 48, 48, 81));
         public Brush main_color {
@@ -54,7 +61,7 @@ namespace CurrentDisplay
         private Brush _main_or_base1_color = new SolidColorBrush(System.Windows.Media.Color.FromArgb(255, 48, 48, 81));
         public Brush main_or_base1_color
         {
-            get { return _main_color; }
+            get { return _main_or_base1_color; }
             set
             {
                 _main_or_base1_color = value;
@@ -81,7 +88,7 @@ namespace CurrentDisplay
             set
             {
                 _current = Double.Parse(value).ToString("F2");
-                updateWindow();
+                // updateWindow();
                 NotifyPropertyChanged("current");
             }
         }
@@ -130,13 +137,5 @@ namespace CurrentDisplay
             }
         }
 
-        private void updateWindow()
-        {
-            double current_value = Double.Parse(current);
-            double limit_value = Double.Parse(current_limit);
-            double use_rate_value = current_value / limit_value * 100;
-            current_use_rate = use_rate_value.ToString("F1");
-            bar_height = (int)(use_rate_value * 2);
-        }
     }
 }
