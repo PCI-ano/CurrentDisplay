@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
@@ -29,7 +30,7 @@ namespace CurrentDisplay
             // センサーからの接続を受け付ける
             MeasureServer server = new MeasureServer();
             server.CurrentDataReceived += Server_CurrentDataReceived;
-            server.run();
+            server.run();            
         }
 
         // センサーから電流データを受け取ったとき
@@ -59,13 +60,14 @@ namespace CurrentDisplay
                 mainWindowData.bar_height = (int)(use_rate_value * 2);
             }
 
-            // 使用率に応じた色変更
+            // 使用率に応じた色変更と警告音の再生
             if (use_rate_value > warning_use_rate)
             {
                 mainWindowData.current_use_message = "警告";
                 mainWindowData.main_color = mainWindowData.warning_color_scheme;
                 mainWindowData.main_or_base1_color = mainWindowData.base1_color_scheme;
                 mainWindowData.base2_or_main_color = mainWindowData.warning_color_scheme;
+                playAlertSound();
             }
             else if (use_rate_value > caution_use_rate)
             {
@@ -82,6 +84,13 @@ namespace CurrentDisplay
                 mainWindowData.base2_or_main_color = mainWindowData.base2_color_scheme;
             }
            
+        }
+
+        private void playAlertSound()
+        {
+            System.Media.SoundPlayer soundPlayer = new System.Media.SoundPlayer("./Sounds/alert.wav");
+            soundPlayer.Play();
+            
         }
 
       
